@@ -1,0 +1,108 @@
+@use 'reset';
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
+.header {
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background-image: url('/background-light.svg');
+	background-size: cover;
+	background-position: 50% 50%;
+	transform-origin: 50% 50%;
+	overflow: hidden;
+	z-index: 10;
+}
+
+.bubble {
+	position: relative;
+	left: 0%;
+	top: 0%;
+	right: auto;
+	bottom: auto;
+	z-index: 2;
+	overflow: hidden;
+	width: 30vw;
+	height: 30vw;
+	margin-top: -15vw;
+	margin-left: -15vw;
+	perspective-origin: 50% 50%;
+	transform-origin: 50% 50%;
+
+	border-radius: 42% 58% 70% 30%/45% 45% 55% 55%;
+	animation: morph 8s linear infinite;
+	will-change: border-radius;
+
+	&::after,
+	&::before {
+		border-radius: 42% 58% 70% 30%/45% 45% 55% 55%;
+		will-change: border-radius;
+		animation-delay: 200ms;
+	}
+
+	&::before {
+		animation: morph 6s linear infinite;
+		animation-duration: 1.5s;
+	}
+
+	&__img {
+		position: absolute;
+		left: 0%;
+		top: 0%;
+		right: 0%;
+		bottom: 0%;
+		z-index: 1;
+		display: flex;
+		width: 100vw;
+		height: 100vh;
+		margin-top: 15vw;
+		margin-left: 15vw;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-image: url('/background-dark.svg');
+		background-position: 50% 50%;
+		background-size: cover;
+		background-color: #1865f6;
+		background-repeat: no-repeat;
+		background-attachment: scroll;
+		perspective-origin: 50% 50%;
+		transform-origin: 50% 50%;
+	}
+}
+
+@keyframes morph {
+	0%,
+	100% {
+		border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+	}
+
+	34% {
+		border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+	}
+
+	50% {
+		opacity: 0.99;
+	}
+
+	67% {
+		border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+	}
+}
