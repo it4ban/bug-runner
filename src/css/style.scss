@@ -106,3 +106,36 @@ body {
 		border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
 	}
 }
+
+.bugs-top {
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	z-index: 2;
+}
+
+.bug {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	transition: transform 1.5s ease;
+	// animation: rX 3s linear 0s infinite alternate, rY 2.5s linear 0s infinite alternate;
+}
+
+// @keyframes rX {
+// 	from {
+// 		right: 0;
+// 	}
+// 	to {
+// 		right: 100vw;
+// 	}
+// }
+// @keyframes rY {
+// 	from {
+// 		bottom: 0;
+// 	}
+// 	to {
+// 		bottom: 167px;
+// 	}
+// }
