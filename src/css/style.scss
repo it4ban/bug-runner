@@ -19,7 +19,17 @@ body {
 	min-height: 100vh;
 }
 
+.page-content {
+	overflow: hidden;
+	margin-top: 100vh;
+}
+
 .header {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	right: auto;
+	bottom: auto;
 	display: block;
 	width: 100vw;
 	height: 100vh;
@@ -27,8 +37,10 @@ body {
 	background-size: cover;
 	background-position: 50% 50%;
 	transform-origin: 50% 50%;
+	perspective-origin: 50% 50%;
+	margin-bottom: 0;
 	overflow: hidden;
-	z-index: 10;
+	z-index: 99;
 }
 
 .bubble {
@@ -110,32 +122,10 @@ body {
 .bugs-top {
 	display: block;
 	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-	z-index: 2;
-}
+	height: auto;
+	mix-blend-mode: exclusion;
 
-.bug {
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	transition: transform 1.5s ease;
-	// animation: rX 3s linear 0s infinite alternate, rY 2.5s linear 0s infinite alternate;
+	svg {
+		width: initial !important;
+	}
 }
-
-// @keyframes rX {
-// 	from {
-// 		right: 0;
-// 	}
-// 	to {
-// 		right: 100vw;
-// 	}
-// }
-// @keyframes rY {
-// 	from {
-// 		bottom: 0;
-// 	}
-// 	to {
-// 		bottom: 167px;
-// 	}
-// }
