@@ -1,39 +1,14 @@
-import lottie from 'lottie-web';
-
 import { BugAnimation } from './core';
 
 import '../css/style.scss';
 
 import { CockraochName } from './enums';
-import { ILottieData, ILayer, ITransform } from './interface';
+import { ITransform } from './interface';
 
 const header = document.querySelector<HTMLElement>('.header');
 const bubble = document.querySelector<HTMLElement>('.bubble');
 const bubbleImg = bubble?.querySelector<HTMLElement>('.bubble__img');
-
-function updateCockroachPaths(
-	updateData: Partial<Record<CockraochName, ITransform>>,
-	lottieData: ILottieData,
-): ILottieData {
-	lottieData.layers.forEach((layer) => {
-		if (layer.nm.startsWith('cockraoch control')) {
-			const pathData = updateData[layer.nm];
-
-			if (pathData) {
-				// update coords
-				layer.ks.p.k[0].s = pathData.p.k[0].s;
-				layer.ks.p.k[0].to = pathData.p.k[0].to;
-				layer.ks.p.k[1].s = pathData.p.k[1].s;
-
-				// update angle rotate
-				layer.ks.r.k[0].s = pathData.r.k[0].s;
-				layer.ks.r.k[1].s = pathData.r.k[1].s;
-			}
-		}
-	});
-
-	return lottieData;
-}
+const bugsTop = document.querySelector<HTMLElement>('.bugs-top');
 
 const updatePaths: Partial<Record<CockraochName, ITransform>> = {
 	'cockraoch control': {
@@ -61,23 +36,11 @@ const updatePaths: Partial<Record<CockraochName, ITransform>> = {
 	},
 };
 
-fetch('/bug-runner/src/data/bug-animation.json')
-	.then((res) => res.json())
-	.then((lottieData: ILottieData) => {
-		const updatedData = updateCockroachPaths(updatePaths, lottieData);
-
-		lottie.loadAnimation({
-			container: document.querySelector('.bugs-top') ?? document.body,
-			animationData: updatedData ?? null,
-			renderer: 'svg',
-			loop: true,
-			autoplay: true,
-			path: updatedData ? undefined : '/bug-runner/src/data/bug-animation.json',
-		});
-	});
-
-new BugAnimation({
+const bugAnimation = new BugAnimation({
 	container: header,
 	bubble: bubble,
 	bubbleImg: bubbleImg,
+	bugsTop: bugsTop,
 });
+
+bugAnimation.setAnimation('/bug-runner/src/data/bug-animation.json', updatePaths);

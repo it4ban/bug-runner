@@ -1,4 +1,7 @@
-import { IBugAnimation } from '../interface';
+import lottie from 'lottie-web';
+
+import { CockraochName } from '../enums';
+import { IBugAnimation, ITransform, ILottieData } from '../interface';
 
 export class BugAnimation {
 	private targetX = 0;
@@ -8,17 +11,17 @@ export class BugAnimation {
 	private container: HTMLElement;
 	private bubble: HTMLElement;
 	private bubbleImg: HTMLElement;
-	private rect: DOMRect;
+	private bugsTop: HTMLElement;
 
 	constructor(props: IBugAnimation) {
-		if (!props.bubble || !props.bubbleImg || !props.container) {
-			throw new Error('Element not found');
+		if (!props.bubble || !props.bubbleImg || !props.container || !props.bugsTop) {
+			throw new Error('Failed to init animation');
 		}
 
 		this.container = props.container;
-		this.rect = this.container.getBoundingClientRect();
 		this.bubble = props.bubble;
 		this.bubbleImg = props.bubbleImg;
+		this.bugsTop = props.bugsTop;
 
 		this.moveTo();
 		this.animateHover();
@@ -43,5 +46,54 @@ export class BugAnimation {
 		requestAnimationFrame(() => this.animateHover());
 	}
 
-	public setCoords(paths: any) {}
+	private updateAnimationPath(
+		newCoords: Partial<Record<CockraochName, ITransform>>,
+		lottieData: ILottieData,
+	): ILottieData {
+		lottieData.layers.forEach((layer) => {
+			if (layer.nm.startsWith('cockraoch control')) {
+				const pathData = newCoords[layer.nm];
+
+				if (pathData) {
+					// update coords
+					layer.ks.p.k[0].s = pathData.p.k[0].s;
+					layer.ks.p.k[0].to = pathData.p.k[0].to;
+					layer.ks.p.k[1].s = pathData.p.k[1].s;
+
+					// update angle rotate
+					layer.ks.r.k[0].s = pathData.r.k[0].s;
+					layer.ks.r.k[1].s = pathData.r.k[1].s;
+				}
+			}
+		});
+
+		return lottieData;
+	}
+
+	public setAnimation(file: string, coords?: Partial<Record<CockraochName, ITransform>>) {
+		fetch(file)
+			.then((res) => res.json())
+			.then((lottieData: ILottieData) => {
+				if (coords) {
+					const upadatedAnimation = this.updateAnimationPath(coords, lottieData);
+
+					lottie.loadAnimation({
+						container: this.bugsTop,
+						renderer: 'svg',
+						loop: true,
+						autoplay: true,
+						animationData: upadatedAnimation,
+					});
+				} else {
+					lottie.loadAnimation({
+						container: this.bugsTop,
+						renderer: 'svg',
+						loop: true,
+						autoplay: true,
+						animationData: lottieData,
+					});
+				}
+			})
+			.catch((err) => console.error(err));
+	}
 }
