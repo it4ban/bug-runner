@@ -74,4 +74,4 @@ const bugAnimation = new BugAnimation({
 	bugsTop: bugsTop,
 });
 
-bugAnimation.setAnimation('/bug-runner/bug-animation.json', updatePaths);
+bugAnimation.setAnimation('/bug-runner/bug-animation.json');
