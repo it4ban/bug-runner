@@ -31,14 +31,21 @@ gsap.set('.cursor', {
 	yPercent: -50,
 });
 
-let xTo = gsap.quickTo('.cursor', 'x', { duration: 0.01, ease: 'power1.inOut' });
-let yTo = gsap.quickTo('.cursor', 'y', { duration: 0.01, ease: 'power1.inOut' });
+let xTo = gsap.quickTo('.cursor', 'x', { duration: 0.01, ease: 'power2.inOut' });
+let yTo = gsap.quickTo('.cursor', 'y', { duration: 0.01, ease: 'power2.inOut' });
 
 window.addEventListener('mousemove', (e) => {
 	const mouseEvent = e as MouseEvent;
 
 	xTo(mouseEvent.clientX);
 	yTo(mouseEvent.clientY);
+});
+
+window.addEventListener('mouseout', (e) => {
+	const mouseEvent = e as MouseEvent;
+
+	xTo(window.innerWidth / 2);
+	yTo(window.innerHeight / 2);
 });
 
 const updatePaths: Partial<Record<CockraochName, ITransform>> = {
