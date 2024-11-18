@@ -1,4 +1,4 @@
-import '../css/style.scss';
+import '../scss/style.scss';
 
 import gsap from 'gsap';
 
