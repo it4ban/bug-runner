@@ -35,9 +35,7 @@ export class BugAnimation {
 			this.targetY = mouseEvent.pageY;
 		});
 
-		this.container.addEventListener('mouseout', (e) => {
-			const mouseEvent = e as MouseEvent;
-
+		this.container.addEventListener('mouseout', () => {
 			this.targetX = window.innerWidth / 2;
 			this.targetY = window.innerHeight / 2;
 		});

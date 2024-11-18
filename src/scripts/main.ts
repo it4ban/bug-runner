@@ -41,9 +41,7 @@ window.addEventListener('mousemove', (e) => {
 	yTo(mouseEvent.clientY);
 });
 
-window.addEventListener('mouseout', (e) => {
-	const mouseEvent = e as MouseEvent;
-
+window.addEventListener('mouseout', () => {
 	xTo(window.innerWidth / 2);
 	yTo(window.innerHeight / 2);
 });
@@ -81,4 +79,4 @@ const bugAnimation = new BugAnimation({
 	bugsTop: bugsTop,
 });
 
-bugAnimation.setAnimation('/bug-runner/bug-animation.json');
+bugAnimation.setAnimation('/bug-runner/bug-animation.json', updatePaths);
