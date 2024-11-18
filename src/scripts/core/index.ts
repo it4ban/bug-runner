@@ -1,4 +1,4 @@
-import { IBugAnimation, ICoordsPaths } from '../interface';
+import { IBugAnimation } from '../interface';
 
 export class BugAnimation {
 	private targetX = 0;
@@ -43,5 +43,5 @@ export class BugAnimation {
 		requestAnimationFrame(() => this.animateHover());
 	}
 
-	public run(paths: ICoordsPaths[]) {}
+	public setCoords(paths: any) {}
 }
