@@ -28,12 +28,10 @@
 	},
 ```
 
-`cockraoch control` - это имя того жука, для которого требуется задать иной маршрут, всего их 4:
+`cockraoch control` - это имя того жука, для которого требуется задать иной маршрут, всего их 3:
 
 `cockraoch control`
 
 `cockraoch control 2`
 
 `cockraoch control 3`
-
-`cockraoch control 4`
