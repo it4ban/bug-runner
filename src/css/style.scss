@@ -12,11 +12,12 @@
 }
 
 body {
-	margin: 0;
+	overflow: hidden;
+	max-width: 100vw;
 	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	background-color: #1965f6;
 }
 
 .page-content {
@@ -124,8 +125,4 @@ body {
 	width: 100vw;
 	height: auto;
 	mix-blend-mode: exclusion;
-
-	svg {
-		width: initial !important;
-	}
 }

@@ -9,7 +9,6 @@ export class BugAnimation {
 	private bubble: HTMLElement;
 	private bubbleImg: HTMLElement;
 	private rect: DOMRect;
-	private animationsRunning = [];
 
 	constructor(props: IBugAnimation) {
 		if (!props.bubble || !props.bubbleImg || !props.container) {
@@ -31,8 +30,6 @@ export class BugAnimation {
 
 			this.targetX = mouseEvent.pageX;
 			this.targetY = mouseEvent.pageY;
-
-			this.detectAngle(this.targetX, this.targetY);
 		});
 	}
 
@@ -44,20 +41,6 @@ export class BugAnimation {
 		this.bubbleImg!.style.transform = `translate3d(${-this.currentX}px, ${-this.currentY}px, 0)`;
 
 		requestAnimationFrame(() => this.animateHover());
-	}
-
-	private detectAngle(x: number, y: number) {
-		const threshold = 150;
-
-		if (x < threshold && y < threshold) {
-			console.log('top left');
-		} else if (x > this.rect.width - threshold && y < threshold) {
-			console.log('top right');
-		} else if (x < threshold && y > this.rect.height - threshold) {
-			console.log('bottom left');
-		} else if (x > this.rect.width - threshold && y > this.rect.height - threshold) {
-			console.log('bottom right');
-		}
 	}
 
 	public run(paths: ICoordsPaths[]) {}
